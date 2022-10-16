@@ -1,0 +1,57 @@
+
+float V1, V2;
+int value1, value2;
+
+void setup() {
+pinMode(3, OUTPUT);
+digitalWrite(3, LOW); 
+pinMode(2, OUTPUT);
+digitalWrite(2, LOW); 
+
+Serial.begin(9600);
+}
+
+void loop() {
+  while(1){
+value2= analogRead(1);
+value1= analogRead(0)-value2;
+V1=value1*5.0/1023.0;
+V2=value2*5.0/1023.0;
+
+Serial.print("V1= ");
+Serial.print(V1);
+Serial.print("\t"); 
+Serial.print("V2= ");
+Serial.print(V2);
+Serial.print("\n"); 
+ 
+ delay(5);
+
+if (digitalRead(9)==0)
+{
+      
+      if (V1>2.5){
+        digitalWrite(2, HIGH); 
+        delay(5);
+      }
+      else {
+        digitalWrite(2, LOW);
+        delay(5);
+      }
+      
+      if (V2>2.5){
+        digitalWrite(3, HIGH);
+        delay(5); 
+      }
+      else {
+        digitalWrite(3, LOW);
+        delay(5);
+      }
+}
+else
+    {
+      digitalWrite(2, LOW);
+      digitalWrite(3, LOW);
+    }
+}
+}
